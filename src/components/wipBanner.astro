@@ -36,72 +36,14 @@
     import gsap from "gsap";
     import { TextPlugin } from "gsap/TextPlugin";
     gsap.registerPlugin(TextPlugin);
-    let cursor = gsap
-        .to(".cursor", {
-            opacity: 0,
-            ease: "power2.inOut",
-            repeat: -1,
-        })
-        .pause(1);
-
-    let text = gsap
-        .timeline({ autoRemoveChildren: true, repeat: -1 })
-        .pause();
-    text.add(
-        gsap
-            .timeline({ repeat: 1, yoyo: true, repeatDelay: 1 })
-            .to(".text", {
-                duration: 2,
-                text: '着ぐるみバンドリ！',
-                onComplete: () => {
-                    if (text.getChildren().length === 2) {
-                        cursor.pause(1);
-                        text.pause();
-                    }
-                },
-            })
-    );
-    text.add(
-        gsap
-            .timeline({ repeat: 1, yoyo: true, repeatDelay: 1 })
-            .to(".text", {
-                duration: 2,
-                text: 'Work in progress...',
-                onComplete: () => {
-                    if (text.getChildren().length === 2) {
-                        cursor.pause(1);
-                        text.pause();
-                    }
-                },
-            })
-    );
+    const cursor = gsap.to(".cursor", {
+        opacity: 0,
+        ease: "power2.inOut",
+        repeat: -1,
+    });
+    const text = gsap.timeline({ autoRemoveChildren: false, repeat: -1 });
+    text.to('.text', {duration:2, text:'着ぐるみバンドリ！',repeat:1, yoyo:true, repeatDelay:1});
+    text.to('.text', {duration:2, text:'Work in progress...',repeat:1, yoyo:true, repeatDelay:1});
     cursor.play();
     text.play();
-    // function updateText(inputText) {
-    //     if (cursor.paused()) {
-    //         cursor.play();
-    //     }
-    //     if (text.paused()) {
-    //         text.play();
-    //     }
-    //     text.add(
-    //         gsap
-    //             .timeline({ repeat: 1, yoyo: true, repeatDelay: 1 })
-    //             .to(".text", {
-    //                 duration: 2,
-    //                 text: inputText,
-    //                 onComplete: () => {
-    //                     if (text.getChildren().length === 2) {
-    //                         cursor.pause(1);
-    //                         text.pause();
-    //                     }
-    //                 },
-    //             })
-    //     );
-    // };
-    // for(let i=0;i<10;i++) {
-    //     updateText('RANDOM TEXT - ' + i);
-    // }
-    // updateText('着ぐるみバンドリ！');
-    // updateText('Work in progress...');
 </script>
