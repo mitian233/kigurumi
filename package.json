@@ -15,8 +15,10 @@
     "@astrojs/netlify": "^5.2.1",
     "@astrojs/tailwind": "^5.1.0",
     "@astrojs/vue": "^4.2.0",
+    "@mx-space/api-client": "^1.13.1",
     "astro": "^4.8.2",
     "gsap": "^3.12.5",
+    "marked": "^12.0.2",
     "tailwindcss": "^3.4.3",
     "typescript": "^5.4.5",
     "vue": "^3.4.27"

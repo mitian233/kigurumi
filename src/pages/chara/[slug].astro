@@ -1,9 +1,23 @@
 ---
+import {marked} from "marked";
+import VueFetchData from '../../components/VueFetchData.vue';
 import Layout from "../../layouts/Layout.astro";
+// import mxClient from "../../utils/mx-space-client";
 const { slug } = Astro.params;
 import {idCharaMap} from "../../data/charalist";
 const findChara = (slug: string) => idCharaMap.findIndex((chara) => chara.strid === slug);
 const chara = idCharaMap[findChara(slug)];
+// const [client, endpoint] = mxClient();
+// let posts;
+let infoMd = '';
+// try{
+//     const info = await fetch(endpoint + `/posts/id${chara.strid}/${chara.strid}`).then((res) => res.json());
+//     posts = await client.category.getCategoryByIdOrSlug(`id${chara.strid}`);
+//     infoMd = marked.parse(info.text);
+// } catch (e) {
+//     posts = [];
+//     infoMd = '';
+// }
 export async function getStaticPaths() {
     return idCharaMap.map((chara) => ({
         params: {slug: chara.strid},
@@ -25,13 +39,19 @@ export async function getStaticPaths() {
     </div>
     <div class="w-full min-h-[20svh] px-5 md:px-10">
         <div class="w-full h-fit p-5 md:p-10 border-t-2 border-x rounded-t-xl bg-white bg-opacity-50 backdrop-blur-sm">
-            <h1 class="text-xl md:text-3xl">着ぐるみさんたち</h1>
+            <h1 class="text-xl md:text-3xl">{chara.name}の着ぐるみさんたち</h1>
             <h2 class="md:text-xl">
                 Kigurumi player(s) of {chara.name_en}
             </h2>
             <div class="mt-3">
-                <p>WIP...</p>
+                <VueFetchData pageSlug={slug} client:only="vue" />
             </div>
         </div>
     </div>
 </Layout>
+
+<style is:global>
+    .mdProse p a {
+        @apply underline text-blue-500;
+    }
+</style>

@@ -8,15 +8,7 @@ import Characters from "../components/characters.vue";
 	<div class="w-full h-[100lvh] flex flex-col justify-center items-center">
 		<WipBanner />
 	</div>
-	<div class="w-full min-h-[100svh] px-5 md:px-10">
+	<div class="w-full min-h-[100svh] px-5 md:px-10 mb-16">
 		<Characters client:only="vue" />
-	</div>
-	<div class="w-full h-32 mt-16 bg-white bg-opacity-50 backdrop-blur-sm">
-		<div class="w-full h-full flex justify-center items-center">
-			<p class="text-gray-500 text-sm text-center">
-				<span class="inline-block">© Project 着ぐるみバンドリ！ </span>
-				<span class="inline-block">This site has no association with Bushiroad and GBP.</span>
-			</p>
-		</div>
 	</div>
 </Layout>

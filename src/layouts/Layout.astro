@@ -1,34 +1,44 @@
 ---
 import Background from '../components/Background.vue';
 interface Props {
-	title: string;
+    title: string;
 }
-import { ViewTransitions } from "astro:transitions";
+import {ViewTransitions} from "astro:transitions";
 
-const { title } = Astro.props;
+const {title} = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content="A simple gallery" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&family=Signika+Negative:wght@300..700&display=swap" rel="stylesheet">
-		<ViewTransitions />
-		<title>{title}</title>
-	</head>
-	<body>
-		<Background client:only="vue" />
-		<slot />
-	</body>
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="description" content="A simple gallery"/>
+    <meta name="viewport" content="width=device-width"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&family=Signika+Negative:wght@300..700&display=swap"
+          rel="stylesheet">
+    <ViewTransitions/>
+    <title>{title}</title>
+</head>
+<body>
+<Background client:only="vue"/>
+<slot/>
+<div class="w-full h-32 bg-white bg-opacity-50 backdrop-blur-sm">
+    <div class="w-full h-full flex justify-center items-center">
+        <p class="text-gray-500 text-sm text-center">
+            <span class="inline-block">© Project 着ぐるみバンドリ！ </span>
+            <span class="inline-block">This site has no association with Bushiroad and GBP.</span>
+        </p>
+    </div>
+</div>
+</body>
 </html>
 
 <style is:global>
-	@import url('/webfont/result.css');
-	body {
-		font-family: "A-OTF Shin Go Pro R", "Signika Negative", "M PLUS Rounded 1c", sans-serif;
-	}
+    @import url('/webfont/result.css');
+
+    body {
+        font-family: "A-OTF Shin Go Pro R", "Signika Negative", "M PLUS Rounded 1c", sans-serif;
+    }
 </style>
