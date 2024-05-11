@@ -14,7 +14,7 @@ import circleLineImage from '../assets/bg_common_circleline.png'
 
 export default {
   name: 'Background',
-  data () {
+  data() {
     return {
       width: window.innerWidth,
       height: window.innerHeight,
@@ -42,13 +42,13 @@ export default {
     }
   },
   watch: {
-    'imageAsset.loadCompleteNumber' (value) {
+    'imageAsset.loadCompleteNumber'(value) {
       if (value === 3) {
         this.drawBackgroundLoop()
       }
     }
   },
-  mounted () {
+  mounted() {
     this.imageAsset.backgroundPattern.image = new Image()
     this.imageAsset.backgroundPattern.image.src = backgroundPatternImage.src
     this.imageAsset.circleBase.image = new Image()
@@ -63,7 +63,7 @@ export default {
     }
   },
   methods: {
-    initializeBackgroundAssets () {
+    initializeBackgroundAssets() {
       this.backgroundCtx = this.$refs.background.getContext('2d')
       this.imageAsset.backgroundPattern.canvas = document.createElement('canvas')
       this.imageAsset.backgroundPattern.context = this.imageAsset.backgroundPattern.canvas.getContext('2d')
@@ -82,7 +82,7 @@ export default {
         this.imageAsset.loadCompleteNumber += 1
       }
     },
-    initializeBackgroundPatternCanvas () {
+    initializeBackgroundPatternCanvas() {
       this.imageAsset.backgroundPattern.context.clearRect(0, 0, this.width, this.height)
       this.imageAsset.backgroundPattern.canvas.width = this.width + 268
       this.imageAsset.backgroundPattern.canvas.height = this.height + 200
@@ -94,7 +94,7 @@ export default {
           0, 0, this.imageAsset.backgroundPattern.canvas.width, this.imageAsset.backgroundPattern.canvas.height
       )
     },
-    drawBackgroundLoop () {
+    drawBackgroundLoop() {
       const currentTime = new Date().getTime()
       const patternPositionPercent = (currentTime % 14000) / 14000
       const circlePositionPercent = (currentTime % 40000) / 40000
