@@ -50,7 +50,7 @@ export const bands: Array<Band> = [
             },
             {
                 id: 3,
-                enable: false,
+                enable: true,
                 name: '牛込 りみ',
                 name_en: 'Rimi Ushigomi',
                 color: '#FF55BB',
