@@ -2,7 +2,6 @@
 import Layout from "../../layouts/Layout.astro";
 const { slug } = Astro.params;
 import {idCharaMap} from "../../data/charalist";
-import WipBanner from "../../components/wipBanner.astro";
 const findChara = (slug: string) => idCharaMap.findIndex((chara) => chara.strid === slug);
 const chara = idCharaMap[findChara(slug)];
 export async function getStaticPaths() {
