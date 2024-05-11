@@ -433,3 +433,10 @@ export const bands: Array<Band> = [
         ]
     }
 ]
+
+export const idCharaMap = bands.map((band) => band.chara.map((chara) => {
+    return {
+        ...chara,
+        strid: chara.id.toString().padStart(3, '0')
+    }
+})).flat()

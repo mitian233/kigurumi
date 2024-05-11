@@ -7,31 +7,24 @@ const b = ref<Band[]>([]);
 const sleep = (delay: number) => new Promise((resolve) => setTimeout(resolve, delay));
 
 gsap.registerPlugin(ScrollTrigger);
+const idIndex = bands.map((value) => {
+  let index = 0;
+  const result = value.chara.map(()=>{
+    const result = `#chara-${value.id}-${index}`
+    index++
+    return result
+  })
+  return [`#logo-${value.id}`, result].flat()
+});
 
 onMounted(async()=>{
-  const idIndex = bands.map((value) => {
-    let index = 0;
-    const result = value.chara.map(()=>{
-      const result = `#chara-${value.id}-${index}`
-      index++
-      return result
-    })
-    return [`#logo-${value.id}`, result].flat()
-  });
-
-  const tl = gsap.timeline({
-    repeat: 0,
-    scrollTrigger: {
-      trigger: '#scrollTriggerStart',
-      start: 'top center',
-      end: 'top 100px',
-      // markers: true,
-      // scrub: 0,
-    }
-  });
-  idIndex.forEach((value) => {
+  let tls: Array<gsap.core.Timeline> = [];
+  idIndex.forEach((value, logoIndex) => {
+    const tl = gsap.timeline({repeat:0, scrollTrigger:{trigger: value[0], start:'bottom 80%', end: 'bottom 80%'}});
+    tls.push(tl);
     value.forEach((value) => {
-      tl.from(`${value}`, {y: -20,opacity: 0, duration: 0.75}, '-=0.5');
+
+      tls[logoIndex].from(`${value}`, {y: -20,opacity: 0, duration: 0.75}, '-=0.5');
     })
   });
   // for(let i = 0; i < bands.length; i++){
@@ -58,11 +51,21 @@ onMounted(async()=>{
     <img :src="band.logo" :id="`logo-${band.id}`" class="w-32 mt-5">
     <div class="grid grid-cols-5 justify-center gap-2">
       <div v-for="(chara, index) in band.chara" :id="`chara-${band.id}-${index}`" class="relative h-40 max-w-20 md:h-72 md:max-w-32" >
-        <div class="w-full h-full overflow-hidden backdrop-blur-sm bg-opacity-50 rounded-md" :style="{backgroundColor: chara.enable? chara.color : 'gray'}">
-          <img :src="chara.image" :class="`${chara.enable ? 'charabox':''} h-full object-cover`" :style="!chara.enable? {filter:'grayScale(100%)'} : {}"/>
-        </div>
-        <div class="scale-75 md:scale-100 absolute max-w-full md:max-w-full bottom-0 left-0 bg-white bg-opacity-50 backdrop-blur-sm rounded-md p-1 ">
-          <p>{{chara.name}}</p>
+        <a v-if="chara.enable" class="w-full h-full" :href="chara.link">
+          <div class="w-full h-full overflow-hidden backdrop-blur-sm bg-opacity-50 rounded-md" :style="{backgroundColor: chara.color}">
+            <img :src="chara.image" class="charabox h-full object-cover" />
+          </div>
+          <div class="scale-75 md:scale-100 absolute max-w-full md:max-w-full bottom-0 left-0 bg-white bg-opacity-50 backdrop-blur-sm rounded-md p-1 ">
+            <p>{{chara.name}}</p>
+          </div>
+        </a>
+        <div v-else class="w-full h-full">
+          <div class="w-full h-full overflow-hidden backdrop-blur-sm bg-opacity-50 rounded-md" :style="{backgroundColor: chara.enable? chara.color : 'gray'}">
+            <img :src="chara.image" class="h-full object-cover" style="filter: grayScale(100%);"/>
+          </div>
+          <div class="scale-75 md:scale-100 absolute max-w-full md:max-w-full bottom-0 left-0 bg-white bg-opacity-50 backdrop-blur-sm rounded-md p-1 ">
+            <p>{{chara.name}}</p>
+          </div>
         </div>
       </div>
     </div>
@@ -71,9 +74,7 @@ onMounted(async()=>{
 </template>
 
 <style scoped>
-div {
-  font-family: "Signika Negative", "M PLUS Rounded 1c", sans-serif;
-}
+
 .charabox {
   transition: transform 0.5s;
 }
