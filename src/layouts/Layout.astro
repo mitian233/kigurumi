@@ -18,6 +18,14 @@ const {title} = Astro.props;
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&family=Signika+Negative:wght@300..700&display=swap"
           rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MVN9WMB6C4"></script>
+    <script is:inline>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-MVN9WMB6C4');
+    </script>
     <ViewTransitions/>
     <title>{title}</title>
 </head>
@@ -25,10 +33,15 @@ const {title} = Astro.props;
 <Background client:only="vue"/>
 <slot/>
 <div class="w-full h-32 bg-white bg-opacity-50 backdrop-blur-sm">
-    <div class="w-full h-full flex justify-center items-center">
+    <div class="w-full h-full flex flex-col gap-2 justify-center items-center">
         <p class="text-gray-500 text-sm text-center">
             <span class="inline-block">© Project 着ぐるみバンドリ！ </span>
             <span class="inline-block">This site has no association with Bushiroad and GBP.</span>
+        </p>
+        <p>
+            <a href="https://app.netlify.com/sites/delightful-kringle-bbf429/deploys">
+                <img src="https://api.netlify.com/api/v1/badges/4a3bd9d9-48b1-4ede-a115-b471d37e506d/deploy-status" alt="Deploy Status Badge" />
+            </a>
         </p>
     </div>
 </div>

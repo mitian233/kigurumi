@@ -3,13 +3,15 @@ import Layout from '../layouts/Layout.astro';
 import WipBanner from "../components/wipBanner.astro";
 import Characters from "../components/characters.vue";
 import Banner from "../components/Banner.astro";
+import HomeFooter from "../components/homeFooter.astro";
 ---
 
 <Layout title="着ぐるみバンドリ！">
-	<div class="w-full h-[75lvh] flex flex-col justify-center items-center">
+	<div class="w-full h-[70lvh] flex flex-col justify-center items-center">
 		<Banner/>
 	</div>
-	<div class="w-full min-h-[100svh] px-5 md:px-10 mb-16">
+	<div class="w-full min-h-[100svh] px-5 md:px-10">
 		<Characters client:only="vue" />
 	</div>
+	<HomeFooter />
 </Layout>

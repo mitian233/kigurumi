@@ -11,8 +11,9 @@ gsap.registerPlugin(ScrollTrigger);
 onMounted(async()=>{
   let tls: Array<gsap.core.Timeline> = [];
   let charaId = 1;
+  gsap.from('.chara', {y: -20, opacity: 0, duration: 1, scrollTrigger: {trigger: `.chara`, start:'bottom 80%', end: 'bottom 80%'}})
   bands.forEach((value, index) => {
-    const tl = gsap.timeline({repeat:0, scrollTrigger:{trigger: `#logo-${value.id}`, start:'bottom 80%', end: 'bottom 80%'}});
+    const tl = gsap.timeline({repeat:0, scrollTrigger: {trigger: `#logo-${value.id}`, start:'bottom 80%', end: 'bottom 80%'}});
     tls.push(tl);
     tls[index].from(`#logo-${value.id}`, {y: -20, opacity: 0, duration: 1}, '=0');
     value.chara.forEach(() => {
@@ -27,17 +28,17 @@ onMounted(async()=>{
 <template>
 <div class="w-full flex flex-col items-center" id="scrollTriggerStart">
   <div>
-    <h1>Characters</h1>
+    <h1 class="chara">Characters</h1>
   </div>
   <div v-for="band in bands" class="flex flex-col items-center">
     <div :id="`logo-${band.id}`" class="w-32 mt-5">
-      <img :src="band.logo" class="w-full object-fill">
+      <img :src="band.logo" class="w-full object-fill" :alt="band.band">
     </div>
     <div class="grid grid-cols-5 justify-center gap-2">
       <div v-for="(chara, index) in band.chara" :id="`chara-${band.id}-${chara.id}`" class="relative h-40 max-w-20 md:h-72 md:max-w-32" >
         <a v-if="chara.enable" class="w-full h-full" :href="chara.link">
           <div class="w-full h-full overflow-hidden backdrop-blur-sm bg-opacity-50 rounded-md" :style="{backgroundColor: chara.color}">
-            <img :src="chara.image" class="charabox h-full object-cover" />
+            <img :src="chara.image" class="charabox h-full object-cover" :alt="chara.name_en" />
           </div>
           <div class="scale-75 md:scale-100 absolute max-w-full md:max-w-full bottom-0 left-0 bg-white bg-opacity-50 backdrop-blur-sm rounded-md p-1 ">
             <p>{{chara.name}}</p>

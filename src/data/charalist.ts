@@ -335,7 +335,7 @@ export const bands: Array<Band> = [
         chara: [
             {
                 id: 34,
-                enable: false,
+                enable: true,
                 name: 'パレオ',
                 name_en: 'PAREO',
                 color: '#FF99BB',
