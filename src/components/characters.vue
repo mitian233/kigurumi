@@ -7,37 +7,19 @@ const b = ref<Band[]>([]);
 const sleep = (delay: number) => new Promise((resolve) => setTimeout(resolve, delay));
 
 gsap.registerPlugin(ScrollTrigger);
-const idIndex = bands.map((value) => {
-  let index = 0;
-  const result = value.chara.map(()=>{
-    const result = `#chara-${value.id}-${index}`
-    index++
-    return result
-  })
-  return [`#logo-${value.id}`, result].flat()
-});
 
 onMounted(async()=>{
   let tls: Array<gsap.core.Timeline> = [];
-  idIndex.forEach((value, logoIndex) => {
-    const tl = gsap.timeline({repeat:0, scrollTrigger:{trigger: value[0], start:'bottom 80%', end: 'bottom 80%'}});
+  let charaId = 1;
+  bands.forEach((value, index) => {
+    const tl = gsap.timeline({repeat:0, scrollTrigger:{trigger: `#logo-${value.id}`, start:'bottom 80%', end: 'bottom 80%'}});
     tls.push(tl);
-    value.forEach((value) => {
-
-      tls[logoIndex].from(`${value}`, {y: -20,opacity: 0, duration: 0.75}, '-=0.5');
-    })
+    tls[index].from(`#logo-${value.id}`, {y: -20, opacity: 0, duration: 1}, '=0');
+    value.chara.forEach(() => {
+      tls[index].from(`#chara-${value.id}-${charaId}`, {y: -20, opacity: 0, duration: 1}, '-=0.75');
+      charaId++;
+    });
   });
-  // for(let i = 0; i < bands.length; i++){
-  //   b.value.push({
-  //     band: bands[i].band,
-  //     logo: bands[i].logo,
-  //     chara: []
-  //   });
-  //   for(let m = 0;m < bands[i].chara.length; m++){
-  //     b.value[i].chara.push(bands[i].chara[m])
-  //     await sleep(100)
-  //   }
-  // }
 })
 
 </script>
@@ -48,9 +30,11 @@ onMounted(async()=>{
     <h1>Characters</h1>
   </div>
   <div v-for="band in bands" class="flex flex-col items-center">
-    <img :src="band.logo" :id="`logo-${band.id}`" class="w-32 mt-5">
+    <div :id="`logo-${band.id}`" class="w-32 mt-5">
+      <img :src="band.logo" class="w-full object-fill">
+    </div>
     <div class="grid grid-cols-5 justify-center gap-2">
-      <div v-for="(chara, index) in band.chara" :id="`chara-${band.id}-${index}`" class="relative h-40 max-w-20 md:h-72 md:max-w-32" >
+      <div v-for="(chara, index) in band.chara" :id="`chara-${band.id}-${chara.id}`" class="relative h-40 max-w-20 md:h-72 md:max-w-32" >
         <a v-if="chara.enable" class="w-full h-full" :href="chara.link">
           <div class="w-full h-full overflow-hidden backdrop-blur-sm bg-opacity-50 rounded-md" :style="{backgroundColor: chara.color}">
             <img :src="chara.image" class="charabox h-full object-cover" />
