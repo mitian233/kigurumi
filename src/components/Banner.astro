@@ -8,9 +8,11 @@
 </div>
 
 <script>
-    const joinusButton = document.getElementById('joinus');
-    joinusButton?.addEventListener('click', () => {
-        window.location.href = 'https://forms.office.com/r/ii0gqBDar8';
+    document.addEventListener('astro:page-load', () => {
+        const joinusButton = document.getElementById('joinus');
+        joinusButton?.addEventListener('click', () => {
+            window.location.href = 'https://forms.office.com/r/ii0gqBDar8';
+        });
     });
 </script>
 

@@ -13,30 +13,32 @@
     import {TextPlugin} from "gsap/TextPlugin";
 
     gsap.registerPlugin(TextPlugin);
-    // const cursor = gsap.to(".cursor", {
-    //     opacity: 0,
-    //     ease: "power2.inOut",
-    //     repeat: -1,
-    // });
-    const text = gsap.timeline({autoRemoveChildren: false, repeat: -1});
-    text.to('.text', {
-        duration: 1.5,
-        text: 'Work in progress...',
-        repeat: 0,
-        yoyo: false,
-        repeatDelay: 1,
-        ease: 'none'
-    }, '+=1');
-    text.to('.text', {
-        duration: 1.5,
-        text: '着ぐるみバンドリ！',
-        repeat: 0,
-        yoyo: false,
-        repeatDelay: 1,
-        ease: 'none'
-    }, '+=1');
-    // cursor.play();
-    text.play();
+    document.addEventListener('astro:page-load', () => {
+        // const cursor = gsap.to(".cursor", {
+        //     opacity: 0,
+        //     ease: "power2.inOut",
+        //     repeat: -1,
+        // });
+        const text = gsap.timeline({autoRemoveChildren: false, repeat: -1});
+        text.to('.text', {
+            duration: 1.5,
+            text: 'Work in progress...',
+            repeat: 0,
+            yoyo: false,
+            repeatDelay: 1,
+            ease: 'none'
+        }, '+=1');
+        text.to('.text', {
+            duration: 1.5,
+            text: '着ぐるみバンドリ！',
+            repeat: 0,
+            yoyo: false,
+            repeatDelay: 1,
+            ease: 'none'
+        }, '+=1');
+        // cursor.play();
+        text.play();
+    });
 </script>
 
 <style>
