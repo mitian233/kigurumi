@@ -35,11 +35,14 @@ const {title} = Astro.props;
 <div class="w-full h-32 bg-white bg-opacity-50 backdrop-blur-sm">
     <div class="w-full h-full flex flex-col gap-2 justify-center items-center">
         <p class="text-gray-500 text-sm text-center">
-            <span class="inline-block">© Project 着ぐるみバンドリ！ </span>
-            <span class="inline-block">This site has no association with Bushiroad and GBP.</span>
+            <span class="inline-block"><span id="date"></span>&nbsp;© Project 着ぐるみバンドリ！ </span>
+            <span class="inline-block">This site has no association with Bushiroad and GBP. </span>
         </p>
         <p>
-            <a href="https://app.netlify.com/sites/delightful-kringle-bbf429/deploys">
+            <a class="inline-block" href="https://github.com/mitian233/kigurumi">
+                <img src="https://img.shields.io/badge/GitHub-000000" alt="GitHub Badge" />
+            </a>
+            <a class="inline-block" href="https://app.netlify.com/sites/delightful-kringle-bbf429/deploys">
                 <img src="https://api.netlify.com/api/v1/badges/4a3bd9d9-48b1-4ede-a115-b471d37e506d/deploy-status" alt="Deploy Status Badge" />
             </a>
         </p>
@@ -47,6 +50,12 @@ const {title} = Astro.props;
 </div>
 </body>
 </html>
+
+<script>
+    const date = new Date();
+    const dateElement = document.getElementById('date');
+    dateElement.innerText = date.getFullYear().toString();
+</script>
 
 <style is:global>
     @import url('/webfont/result.css');

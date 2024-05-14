@@ -24,7 +24,10 @@ onMounted(async() => {
 
 <template>
   <Transition name="fade" mode="out-in">
-    <div class="mdProse" v-if="infoMd!==''" v-html="infoMd"></div>
+    <div class="mdProse" v-if="infoMd!==''">
+      <div v-html="infoMd"/>
+      <p class="text-sm text-gray-300 text-right">五十音順 (Order by Japanese kana)</p>
+    </div>
     <p class="loading" v-else-if="isLoading === true">Loading...</p>
     <p v-else-if="isLoading === 'error'">エラーが発生しました</p>
     <p v-else>まだ情報がありません</p>
