@@ -6,6 +6,8 @@ interface Props {
 import {ViewTransitions} from "astro:transitions";
 
 const {title} = Astro.props;
+const date = new Date();
+const year = date.getFullYear();
 ---
 
 <!doctype html>
@@ -35,7 +37,7 @@ const {title} = Astro.props;
 <div class="w-full h-32 bg-white bg-opacity-50 backdrop-blur-sm">
     <div class="w-full h-full flex flex-col gap-2 justify-center items-center">
         <p class="text-gray-500 text-sm text-center">
-            <span class="inline-block"><span id="date"></span>&nbsp;© Project 着ぐるみバンドリ！ </span>
+            <span class="inline-block">{year}&nbsp;© Project 着ぐるみバンドリ！ </span>
             <span class="inline-block">This site has no association with Bushiroad and GBP. </span>
         </p>
         <p>
@@ -50,12 +52,6 @@ const {title} = Astro.props;
 </div>
 </body>
 </html>
-
-<script>
-    const date = new Date();
-    const dateElement = document.getElementById('date');
-    dateElement.innerText = date.getFullYear().toString();
-</script>
 
 <style is:global>
     @import url('/webfont/result.css');
