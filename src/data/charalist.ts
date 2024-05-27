@@ -387,7 +387,7 @@ export const bands: Array<Band> = [
         chara: [
             {
                 id: 39,
-                enable: false,
+                enable: true,
                 name: '長崎 そよ',
                 name_en: 'Soyo Nagasaki',
                 color: '#FFDD88',
@@ -423,7 +423,7 @@ export const bands: Array<Band> = [
             },
             {
                 id: 40,
-                enable: false,
+                enable: true,
                 name: '椎名 立希',
                 name_en: 'Taki Shiina',
                 color: '#7777AA',
